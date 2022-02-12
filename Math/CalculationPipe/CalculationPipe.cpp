@@ -14,5 +14,4 @@ namespace calculation {
 
 		return c.calculate(dc.convert_parsed_data(p.parse(data)));
 	}
-
 }
