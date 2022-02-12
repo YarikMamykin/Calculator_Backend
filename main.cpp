@@ -19,7 +19,7 @@ std::string parse_host() {
     return { "127.0.0.1" };
 }
 
-unsigned short parse_port() { 
+unsigned short parse_port() {
 
     if(const char* port = std::getenv("CALC_PORT")) {
         return std::stoi(port);
