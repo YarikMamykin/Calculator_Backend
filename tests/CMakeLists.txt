@@ -1,4 +1,6 @@
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.7)
+
+include("${CMAKE_SOURCE_DIR}/Gtest.cmake")
 
 include_directories(${CMAKE_SOURCE_DIR}/Math/InputParser)
 include_directories(${CMAKE_SOURCE_DIR}/Math/InputDataConverter)
