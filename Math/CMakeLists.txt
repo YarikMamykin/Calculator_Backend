@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.7)
 
 include_directories(Enums)
 include_directories(Operand)
@@ -24,4 +24,4 @@ add_library(MATH SHARED
 	$<TARGET_OBJECTS:lib_input_data_converter>
 )
 
-install(TARGETS MATH DESTINATION ${CMAKE_INSTALL_PREFIX})
+install(TARGETS MATH DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/)

@@ -1,0 +1,29 @@
+name: CMake
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    # The CMake configure and build commands are platform agnostic and should work equally well on Windows or Mac.
+    # You can convert this to a matrix build if you need cross-platform coverage.
+    # See: https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Create build dir
+      run: mkdir build 
+
+    - name: Cmake 
+      run: cd build && cmake -DCMAKE_INSTALL_PREFIX=. -DBUILD_TESTS=ON .. 
+    
+    - name: Make install 
+      run: cd build && make install 
+
+    - name: Tests
+      run: cd build/tests && ctest --verbose

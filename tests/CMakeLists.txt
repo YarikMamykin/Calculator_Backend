@@ -1,4 +1,6 @@
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.7)
+
+include("${CMAKE_SOURCE_DIR}/Gtest.cmake")
 
 include_directories(${CMAKE_SOURCE_DIR}/Math/InputParser)
 include_directories(${CMAKE_SOURCE_DIR}/Math/InputDataConverter)
@@ -24,4 +26,7 @@ target_link_libraries(UNIT_TESTS
 	MATH
 )
 
-install(TARGETS UNIT_TESTS DESTINATION ${CMAKE_INSTALL_PREFIX})
+enable_testing()
+add_test(NAME UNIT_TESTS COMMAND UNIT_TESTS)
+
+install(TARGETS UNIT_TESTS DESTINATION ${CMAKE_INSTALL_PREFIX}/bin/tests/)
