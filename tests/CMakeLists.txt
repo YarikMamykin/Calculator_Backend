@@ -26,4 +26,7 @@ target_link_libraries(UNIT_TESTS
 	MATH
 )
 
+enable_testing()
+add_test(NAME UNIT_TESTS COMMAND UNIT_TESTS)
+
 install(TARGETS UNIT_TESTS DESTINATION ${CMAKE_INSTALL_PREFIX}/bin/tests/)
