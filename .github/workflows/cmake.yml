@@ -25,5 +25,34 @@ jobs:
     - name: Install
       run: cmake --install build
 
-    - name: Tests
-      run: cd build/tests && ctest --verbose
+    - name: Upload tests
+      uses: actions/upload-artifact@v2
+      with:
+        path: build/tests/
+
+    - name: Upload libs
+      uses: actions/upload-artifact@v2
+      with:
+        path: build/lib/
+
+  tests:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Download tests
+      uses: actions/download-artifact@v2
+      with:
+        path: build/tests/
+
+    - name: Download libs
+      uses: actions/download-artifact@v2
+      with:
+        path: build/lib/
+
+    - name: Run tests
+      run: |
+        chmod -R +x build/lib
+        cd build/tests 
+        chmod +x UNIT_TESTS 
+        ctest --verbose
