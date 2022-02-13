@@ -12,12 +12,14 @@ project(calculator LANGUAGES CXX)
 
 include_directories(Connection)
 include_directories(Math/CalculationPipe)
+include_directories(Router)
 
 add_subdirectory(Connection)
 add_subdirectory(Math)
+add_subdirectory(Router)
 
 add_executable(${PROJECT_NAME} ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp)
-target_link_libraries(${PROJECT_NAME} MATH CONNECTION)
+target_link_libraries(${PROJECT_NAME} MATH CONNECTION ROUTER)
 
 if(${BUILD_TESTS})
 	add_subdirectory(tests)
