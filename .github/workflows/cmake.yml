@@ -16,14 +16,14 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Create build dir
-      run: mkdir build 
-
-    - name: Cmake 
-      run: cd build && cmake -DCMAKE_INSTALL_PREFIX=. -DBUILD_TESTS=ON .. 
+    - name: Prepare for build
+      run: cmake -S . -B build -DCMAKE_INSTALL_PREFIX=. -DBUILD_TESTS=ON
     
-    - name: Make install 
-      run: cd build && make install 
+    - name: Build
+      run: cmake --build build
 
-    - name: Tests
-      run: cd build/tests && ctest --verbose
+    - name: Install
+      run: cmake --install build
+
+    - name: Run tests
+      run: ctest --verbose --test-dir build/tests
