@@ -28,12 +28,12 @@ jobs:
     - name: Upload tests
       uses: actions/upload-artifact@v2
       with:
-        path: build/tests/
+        path: build/tests/**
 
     - name: Upload libs
       uses: actions/upload-artifact@v2
       with:
-        path: build/lib/
+        path: build/lib/**
 
   tests:
     needs: build
@@ -43,16 +43,17 @@ jobs:
     - name: Download tests
       uses: actions/download-artifact@v2
       with:
-        path: build/tests/
+        path: build/tests/**
 
     - name: Download libs
       uses: actions/download-artifact@v2
       with:
-        path: build/lib/
+        path: build/lib/**
 
     - name: Run tests
       run: |
-        chmod -R +x build/lib
+        chmod -R +x build/lib/
+        chmod -R +x build/tests/
         cd build/tests 
-        chmod +x UNIT_TESTS 
+        ls -lst .
         ctest --verbose
