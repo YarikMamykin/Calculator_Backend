@@ -1,4 +1,4 @@
-#include <CalculationPipe.h>
+#include "DecimalCalculationPipe.h"
 #include <InputParser.h>
 #include <InputDataConverter.h>
 #include <Calculator.h>
@@ -6,12 +6,12 @@
 
 namespace calculation {
 
-	calculation::ResultType CalculationPipe::run(std::string&& data) const {
+	std::string DecimalCalculationPipe::run(std::string&& data) const {
 
 		input::Parser p;
 		input::DataConverter dc;
 		Calculator c;
 
-		return c.calculate(dc.convert_parsed_data(p.parse(data)));
+		return std::to_string(c.calculate(dc.convert_parsed_data(p.parse(data))));
 	}
 }
