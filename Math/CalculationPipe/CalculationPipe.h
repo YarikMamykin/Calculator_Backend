@@ -3,12 +3,10 @@
 #include <string>
 
 namespace calculation {
-
-	using ResultType = double;
-
+	
 	struct CalculationPipe {
 
-			ResultType run(std::string&& data) const;
+		virtual std::string run(std::string&& data) const = 0;
 
 	};
 }
