@@ -11,13 +11,14 @@ ExternalProject_Add(
     boost
 		URL https://boostorg.jfrog.io/artifactory/main/release/1.77.0/source/boost_1_77_0.tar.gz
     BUILD_IN_SOURCE 1
-    CONFIGURE_COMMAND "./bootstrap.sh"
-    BUILD_COMMAND "./b2" --prefix=${BOOST_INSTALL_DIR} 
-                         --threading=single,multi 
+    CONFIGURE_COMMAND "./bootstrap.sh" --prefix=${BOOST_INSTALL_DIR} 
+    BUILD_COMMAND "./b2" --disable-icu 
+                         --with-system 
+                         --with-thread 
+                         --with-date_time 
+                         --with-regex 
+                         --with-serialization 
                          --link=shared 
-                         --without-python 
-                         --without-mpi 
-                         --disable-icu
                          -j ${BOOST_BUILD_CPU_THREADS} 
                          install 
     INSTALL_COMMAND ""
