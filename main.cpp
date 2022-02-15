@@ -1,12 +1,12 @@
 #include <iostream>
-#include <DecimalCalculationPipe.h>
+#include <Router.h>
 #include <Connection.h>
 #include <cstdlib>
 
 struct ConnectionClient : public connection::Connection::Client {
     std::string on_data_receive(std::string&& data) override {
-        std::unique_ptr<calculation::CalculationPipe> pipe { new calculation::DecimalCalculationPipe };
-        return pipe->run(std::move(data));
+        routing::Router router;
+        return router.routing_action(std::move(data))();
     }
 };
 
