@@ -15,6 +15,7 @@ set(SOURCES
 	${CMAKE_CURRENT_SOURCE_DIR}/InputParserTest.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/InputDataConverterTest.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/CalculatorTest.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/RouterTest.cpp
 )
 
 add_executable(UNIT_TESTS ${SOURCES})
@@ -24,6 +25,7 @@ target_link_libraries(UNIT_TESTS
 	gmock
 	gtest_main
 	MATH
+	ROUTER
 )
 
 enable_testing()
