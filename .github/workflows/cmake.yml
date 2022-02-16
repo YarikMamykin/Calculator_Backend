@@ -44,7 +44,7 @@ jobs:
             build/lib/
 
       - name: List
-        run: ls -lst ./**
+        run: ls -lst build/tests/** && ls -lst build/lib/** && ls -lst ./**
 
       - name: Unit tests
         run: ctest --output-on-failure --test-dir build/tests
