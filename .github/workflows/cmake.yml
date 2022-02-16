@@ -39,6 +39,9 @@ jobs:
         with:
           path: install/
 
+      - name: List
+        run: ls -lst install/**
+
       - name: Unit tests
         run: cd install && chmod +x ./bin/tests/UNIT_TESTS && ./bin/tests/UNIT_TESTS
 
