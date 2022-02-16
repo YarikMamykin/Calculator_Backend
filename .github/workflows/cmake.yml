@@ -45,6 +45,9 @@ jobs:
             build/tests/CTestTestfile.cmake
             build/lib/*.so
 
+      - name: List
+        run: ls -lst build/**
+
       - name: Unit tests
         run: ctest --output-on-failure --test-dir build/tests
 
