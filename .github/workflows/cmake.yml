@@ -25,16 +25,6 @@ jobs:
     - name: Install
       run: cmake --install build
 
-    - name: Upload tests
-      uses: actions/upload-artifact@v2
-      with:
-        path: build/tests/
-
-    - name: Upload libs
-      uses: actions/upload-artifact@v2
-      with:
-        path: build/lib/
-
     - name: Upload install
       uses: actions/upload-artifact@v2
       with:
@@ -44,21 +34,11 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Download tests
-        uses: actions/download-artifact@v2
-        with:
-          path: build/tests/
-
-      - name: Download libs
-        uses: actions/download-artifact@v2
-        with:
-          path: build/lib/
-
       - name: Download install
         uses: actions/download-artifact@v2
         with:
           path: install/
 
       - name: Unit tests
-        run: ctest --output-on-failure --test-dir build/tests
+        run: cd install && chmod +x ./bin/tests/UNIT_TESTS && ./bin/tests/UNIT_TESTS
 
