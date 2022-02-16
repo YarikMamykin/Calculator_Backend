@@ -25,5 +25,26 @@ jobs:
     - name: Install
       run: cmake --install build
 
-    - name: Run tests
-      run: ctest --verbose --test-dir build/tests
+    - name: Upload artifacts
+      uses: actions/upload-artifacts@v2
+      with:
+        path: |
+          build/tests/UNIT_TESTS
+          build/tests/CTestTestfile.cmake
+          build/lib/*.so
+
+  tests:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifacts@v2
+        with:
+          path: |
+            build/tests/UNIT_TESTS
+            build/tests/CTestTestfile.cmake
+            build/lib/*.so
+
+      - name: Unit tests
+        run: ctest --output-on-failure --test-dir build/tests
+
