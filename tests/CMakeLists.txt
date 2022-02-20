@@ -32,3 +32,25 @@ enable_testing()
 add_test(NAME UNIT_TESTS COMMAND UNIT_TESTS)
 
 install(TARGETS UNIT_TESTS DESTINATION ${CMAKE_INSTALL_PREFIX}/bin/tests/)
+
+set(BINARY_SOURCES
+	${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/BinaryInputParserTest.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/BinaryCalculatorTest.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/BinaryCalculationPipeTest.cpp
+)
+
+add_executable(BINARY_UNIT_TESTS ${BINARY_SOURCES})
+
+target_link_libraries(BINARY_UNIT_TESTS  
+	gtest 
+	gmock
+	gtest_main
+	MATH
+	ROUTER
+)
+
+enable_testing()
+add_test(NAME BINARY_UNIT_TESTS COMMAND BINARY_UNIT_TESTS)
+
+install(TARGETS BINARY_UNIT_TESTS DESTINATION ${CMAKE_INSTALL_PREFIX}/bin/tests/)
