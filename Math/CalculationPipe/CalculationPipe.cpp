@@ -1,4 +1,5 @@
 #include "CalculationPipe.h"
+#include "BinaryCalculationPipe.h"
 #include <DecimalCalculationPipe.h>
 #include <stdexcept>
 #include <unordered_map>
@@ -10,6 +11,7 @@ namespace {
 
 	const std::unordered_map<std::string, std::function<Pipe()>> pipes {
 		{ std::string { "DECIMAL" }, []() -> Pipe { return std::make_unique<calculation::DecimalCalculationPipe>(); } },
+		{ std::string { "BINARY" }, []() -> Pipe { return std::make_unique<calculation::BinaryCalculationPipe>(); } },
 	};
 
 }

@@ -22,6 +22,8 @@ add_library(MATH SHARED
 	$<TARGET_OBJECTS:lib_operand>
 	$<TARGET_OBJECTS:lib_operation>
 	$<TARGET_OBJECTS:lib_input_data_converter>
+	$<TARGET_OBJECTS:lib_binary_calculator>
+	$<TARGET_OBJECTS:lib_binary_input_parser>
 )
 
 install(TARGETS MATH DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/)

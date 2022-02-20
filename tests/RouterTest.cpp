@@ -11,6 +11,12 @@ TEST_F(RouterTest, RouteToDecimalPipe)
     EXPECT_EQ(5, std::stoi(action()));
 }
 
+TEST_F(RouterTest, RouteToBinaryPipe)
+{
+    auto&& action = router.routing_action( R"({ "pipe": "BINARY", "data": "1010^0010" })" );
+    EXPECT_EQ(action(), "1000");
+}
+
 TEST_F(RouterTest, InvalidPipeName)
 {
     auto&& action = router.routing_action( R"({ "pipe": "decimal", "data": "2+3" })" );
