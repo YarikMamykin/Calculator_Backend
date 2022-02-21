@@ -16,10 +16,10 @@ namespace {
         return {};
     }
 
-    std::unique_ptr<calculation::CalculationPipe> extract_pipe(const rapidjson::Document& doc) {
+    std::unique_ptr<math::calculation::Pipe> extract_pipe(const rapidjson::Document& doc) {
         if(doc.HasMember(key_pipe)) {
             if(doc[key_pipe].IsString()) {
-                return calculation::CalculationPipe::create(doc[key_pipe].GetString());
+                return math::calculation::Pipe::create(doc[key_pipe].GetString());
             }
         }
 
@@ -29,7 +29,7 @@ namespace {
 
 namespace routing {
 
-    RoutingAction::RoutingAction(std::unique_ptr<calculation::CalculationPipe> pipe, std::string&& pipe_input)
+    RoutingAction::RoutingAction(std::unique_ptr<math::calculation::Pipe> pipe, std::string&& pipe_input)
     : pipe(std::move(pipe))
     , pipe_input(std::move(pipe_input)) { }
 

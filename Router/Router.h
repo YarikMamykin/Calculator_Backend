@@ -1,17 +1,17 @@
 #pragma once
 #include <string>
 #include <memory>
-#include <CalculationPipe.h>
+#include <Pipe/Pipe.h>
 
 namespace routing {
 
     class RoutingAction {
-        std::unique_ptr<calculation::CalculationPipe> pipe;
+        std::unique_ptr<math::calculation::Pipe> pipe;
         std::string pipe_input;
 
         public:
 
-            RoutingAction(std::unique_ptr<calculation::CalculationPipe> pipe, std::string&& pipe_input);
+            RoutingAction(std::unique_ptr<math::calculation::Pipe> pipe, std::string&& pipe_input);
             RoutingAction(RoutingAction&&);
             RoutingAction& operator=(RoutingAction&&);
 
