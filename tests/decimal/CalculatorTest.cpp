@@ -1,11 +1,11 @@
 #include <gtest/gtest.h>
-#include <Calculator.h>
+#include <Decimal/Calculator/Calculator.h>
 
 struct CalculatorTest : public ::testing::Test {
 
-	input::Parser ip;
-	input::DataConverter dc;
-	calculation::Calculator c;
+    math::decimal::input::Parser ip;
+    math::decimal::input::DataConverter dc;
+    math::decimal::calculation::Calculator c;
 
 };
 

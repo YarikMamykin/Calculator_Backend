@@ -1,27 +1,27 @@
 #include <gtest/gtest.h>
 #include "gmock/gmock.h"
-#include <InputParser.h>
-#include <InputDataConverter.h>
+#include <Decimal/Parser/Parser.h>
+#include <Decimal/DataConverter/DataConverter.h>
 #include <array>
 
-struct InputDataConverterTest : public ::testing::Test {
+struct DataConverterTest : public ::testing::Test {
 
-    input::Parser parser;
-    input::DataConverter converter;
+    math::decimal::input::Parser parser;
+    math::decimal::input::DataConverter converter;
 
 };
 
-TEST_F(InputDataConverterTest, SimpleOperation)
+TEST_F(DataConverterTest, SimpleOperation)
 {
     auto converted_data = converter.convert_parsed_data(parser.parse("1+2"));
 
-    auto expected_numbers = input::Numbers { 1.0, 2.0 };
+    auto expected_numbers = math::decimal::input::Numbers { 1.0, 2.0 };
     EXPECT_TRUE(converted_data.numbers == expected_numbers);
 
     ASSERT_EQ(converted_data.operations.size(), 1ul);
 
     const auto& op = converted_data.operations.front();
-    EXPECT_EQ(op.t, operation::Type::ADD);
+    EXPECT_EQ(op.t, math::decimal::operation::Type::ADD);
 
     ASSERT_TRUE(op.left.is_number());
     ASSERT_TRUE(op.right.is_number());
@@ -30,17 +30,17 @@ TEST_F(InputDataConverterTest, SimpleOperation)
     EXPECT_EQ(op.right.as_double(), expected_numbers.back());
 }
 
-TEST_F(InputDataConverterTest, OperationsWithDependencies)
+TEST_F(DataConverterTest, OperationsWithDependencies)
 {
     auto converted_data = converter.convert_parsed_data(parser.parse("1+2*3"));
 
-    auto expected_numbers = input::Numbers { 1.0, 2.0, 3.0 };
+    auto expected_numbers = math::decimal::input::Numbers { 1.0, 2.0, 3.0 };
     EXPECT_TRUE(converted_data.numbers == expected_numbers);
 
     ASSERT_EQ(converted_data.operations.size(), 2ul);
 
-    EXPECT_EQ(converted_data.operations.front().t, operation::Type::MULTIPLY);
-    EXPECT_EQ(converted_data.operations.back().t, operation::Type::ADD);
+    EXPECT_EQ(converted_data.operations.front().t, math::decimal::operation::Type::MULTIPLY);
+    EXPECT_EQ(converted_data.operations.back().t, math::decimal::operation::Type::ADD);
 
     ASSERT_TRUE(converted_data.operations.front().left.is_number());
     ASSERT_TRUE(converted_data.operations.front().right.is_number());
@@ -55,7 +55,7 @@ TEST_F(InputDataConverterTest, OperationsWithDependencies)
     EXPECT_DOUBLE_EQ(converted_data.operations.back().right.as_double(), 6.0);
 }
 
-TEST_F(InputDataConverterTest, OperationsWithDependencies2)
+TEST_F(DataConverterTest, OperationsWithDependencies2)
 {
     auto converted_data = converter.convert_parsed_data(parser.parse("1+2*3-7/8"));
     const auto& [ numbers, operations ] = converted_data;
@@ -65,13 +65,13 @@ TEST_F(InputDataConverterTest, OperationsWithDependencies2)
     constexpr std::size_t expected_operations_size { 4ul };
     ASSERT_EQ(operations.size(), expected_operations_size);
 
-    std::array<operation::Type, expected_operations_size> operations_types;
+    std::array<math::decimal::operation::Type, expected_operations_size> operations_types;
     std::transform(operations.begin(), operations.end(), operations_types.begin(), [](const auto& o) { return o.t; });
     EXPECT_THAT(operations_types, testing::ElementsAre(
-                operation::Type::MULTIPLY,
-                operation::Type::DIVIDE,
-                operation::Type::ADD,
-                operation::Type::SUBSTRACT));
+                math::decimal::operation::Type::MULTIPLY,
+                math::decimal::operation::Type::DIVIDE,
+                math::decimal::operation::Type::ADD,
+                math::decimal::operation::Type::SUBSTRACT));
 
     std::array<double, expected_operations_size> operations_left_operands;
     std::transform(operations.begin(), operations.end(), operations_left_operands.begin(), [](const auto& o) -> double { return o.left.as_double(); });

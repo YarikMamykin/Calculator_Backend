@@ -1,9 +1,9 @@
 #include <gtest/gtest.h>
-#include <BinaryCalculationPipe.h>
+#include <Binary/Pipe/Pipe.h>
 
 struct BinaryCalculationPipeTest: public ::testing::Test {
 
-    calculation::BinaryCalculationPipe pipe;
+    math::binary::calculation::Pipe pipe;
 
 };
 

@@ -1,10 +1,10 @@
 #include <gtest/gtest.h>
-#include <BinaryCalculator.h>
+#include <Binary/Calculator/Calculator.h>
 
 struct BinaryCalculatorTest : public ::testing::Test {
 
-    binary::input::Calculator calculator;
-    binary::input::Parser ip;
+    math::binary::calculation::Calculator calculator;
+    math::binary::input::Parser ip;
 
 };
 
@@ -29,7 +29,7 @@ TEST_F(BinaryCalculatorTest, TwoOperationsPassed) {
 
 TEST_F(BinaryCalculatorTest, LongBinaryNumberError) {
 
-    constexpr std::size_t long_binary_number_size { binary::input::BinaryNumberSize + 1ul };
+    constexpr std::size_t long_binary_number_size { math::binary::input::BinaryNumberSize + 1ul };
     using LongBinaryNumber = std::bitset<long_binary_number_size>;
 
     LongBinaryNumber long_operand { std::string(long_binary_number_size,'1') };
