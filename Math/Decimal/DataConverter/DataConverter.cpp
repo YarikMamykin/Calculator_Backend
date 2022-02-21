@@ -1,7 +1,7 @@
-#include <InputDataConverter.h>
+#include <Decimal/DataConverter/DataConverter.h>
 #include <algorithm>
 
-namespace input {
+namespace math::decimal::input {
 	
 	ConvertedData DataConverter::convert_parsed_data(ParsedData&& data) const {
 

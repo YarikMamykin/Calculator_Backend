@@ -3,7 +3,7 @@
 #include <list>
 #include <variant>
 
-namespace operation {
+namespace math::decimal::operation {
 
 	struct Operation;
 

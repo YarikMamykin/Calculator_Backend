@@ -1,7 +1,7 @@
-#include <Operand.h>
-#include <Operation.h>
+#include "Operand.h"
+#include <Decimal/Operation/Operation.h>
 
-namespace operation {
+namespace math::decimal::operation {
 
 	struct ValueAccessor {
 		double operator()(std::list<double>::iterator v) { return *v; }

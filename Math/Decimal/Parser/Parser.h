@@ -1,14 +1,14 @@
 #pragma once
 #include <string>
 #include <list>
-#include <OperationType.h>
+#include <Decimal/Enums/OperationType.h>
 
 
-namespace input {
+namespace math::decimal::input {
 
 	using Data = std::string;
 	using Numbers = std::list<double>;
-	using Operations = std::list<operation::Type>;
+	using Operations = std::list<math::decimal::operation::Type>;
 
 	struct ParsedData {
 		Numbers numbers;

@@ -1,9 +1,9 @@
 #pragma once
 
-#include <InputParser.h>
-#include <Operation.h>
+#include <Decimal/Parser/Parser.h>
+#include <Decimal/Operation/Operation.h>
 
-namespace input {
+namespace math::decimal::input {
 
 	struct ConvertedData {
 		Numbers numbers;

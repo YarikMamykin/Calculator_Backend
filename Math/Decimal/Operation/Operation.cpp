@@ -1,25 +1,24 @@
-#include <Operation.h>
-#include <Calculator.h>
+#include "Operation.h"
 
 namespace {
-	operation::Priority define_operation_priority(operation::Type t) {
+	math::decimal::operation::Priority define_operation_priority(math::decimal::operation::Type t) {
 
-		if(t == operation::Type::DIVIDE || 
-			 t == operation::Type::MULTIPLY) {
+		if(t == math::decimal::operation::Type::DIVIDE || 
+			 t == math::decimal::operation::Type::MULTIPLY) {
 
-			return operation::Priority::HIGH;
+			return math::decimal::operation::Priority::HIGH;
 		}
 		
-		return operation::Priority::LOW;
+		return math::decimal::operation::Priority::LOW;
 	}
 
-	double obtain_result(operation::Type t, double l, double r) {
+	double obtain_result(math::decimal::operation::Type t, double l, double r) {
 
 		switch(t) {
-			case operation::Type::ADD: return l + r;
-			case operation::Type::SUBSTRACT: return l - r;
-			case operation::Type::MULTIPLY: return l * r;
-			case operation::Type::DIVIDE: return l / r;
+			case math::decimal::operation::Type::ADD: return l + r;
+			case math::decimal::operation::Type::SUBSTRACT: return l - r;
+			case math::decimal::operation::Type::MULTIPLY: return l * r;
+			case math::decimal::operation::Type::DIVIDE: return l / r;
 		}
 
 		throw std::runtime_error("Unexpected operation!\n");
@@ -27,7 +26,7 @@ namespace {
 
 }
 
-namespace operation {
+namespace math::decimal::operation {
 
 	Operation::Operation(Type t, Operand l, Operand r) 
 	: t(t) 

@@ -1,6 +1,6 @@
 #pragma once
 
-namespace operation {
+namespace math::decimal::operation {
 
 	enum class Priority { 
 		HIGH, 

@@ -3,11 +3,11 @@
 #include <list>
 #include <variant>
 #include <ostream>
-#include <OperationType.h>
-#include <OperationPriority.h>
-#include <Operand.h>
+#include <Decimal/Enums/OperationType.h>
+#include <Decimal/Enums/OperationPriority.h>
+#include <Decimal/Operand/Operand.h>
 
-namespace operation {
+namespace math::decimal::operation {
 
 	struct Operation {
 		Type t;

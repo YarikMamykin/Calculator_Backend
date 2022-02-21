@@ -1,15 +1,15 @@
-#include <InputParser.h>
+#include "Parser.h"
 #include <stdexcept>
 
 namespace {
 
-	operation::Type char_to_operation(const char c) {
+	math::decimal::operation::Type char_to_operation(const char c) {
 
 		switch(c) {
-			case '+': return operation::Type::ADD;
-			case '-': return operation::Type::SUBSTRACT;
-			case '*': return operation::Type::MULTIPLY;
-			case '/': return operation::Type::DIVIDE;
+			case '+': return math::decimal::operation::Type::ADD;
+			case '-': return math::decimal::operation::Type::SUBSTRACT;
+			case '*': return math::decimal::operation::Type::MULTIPLY;
+			case '/': return math::decimal::operation::Type::DIVIDE;
 		}
 
 		throw std::runtime_error("operation::Type undefined!\n");
@@ -25,9 +25,8 @@ namespace {
 		return allowed_number_identifiers.find(c) != std::string::npos;
 	};
 
-	using namespace input;
-	ParsedData split_numbers_and_operations(Data& input) {
-		ParsedData result;
+	math::decimal::input::ParsedData split_numbers_and_operations(math::decimal::input::Data& input) {
+		math::decimal::input::ParsedData result;
 		auto& [ result_numbers, result_operations ] = result;
 
 		std::string buffer;
@@ -68,28 +67,28 @@ namespace {
 		return result;
 	}
 
-	void handle_empty_input(const Data& input) {
+	void handle_empty_input(const math::decimal::input::Data& input) {
 		if(input.empty()) {
 			throw std::runtime_error("Nothing to parse!\n");
 		}
 	}
 
-	void handle_equal_numbers_and_operations_size(ParsedData& data) {
+	void handle_equal_numbers_and_operations_size(math::decimal::input::ParsedData& data) {
 
 		auto& [ result_numbers, result_operations ] = data;
 
 		if(result_numbers.size() == result_operations.size() && !result_numbers.empty()) {
 
-			if(result_operations.front() == operation::Type::DIVIDE) {
+			if(result_operations.front() == math::decimal::operation::Type::DIVIDE) {
 				throw std::runtime_error("Input error!\n");
 			}
 
-			if(result_operations.front() == operation::Type::MULTIPLY) {
+			if(result_operations.front() == math::decimal::operation::Type::MULTIPLY) {
 				result_numbers.push_front(1.0);
 			}
 
-			if(result_operations.front() == operation::Type::ADD ||
-					result_operations.front() == operation::Type::SUBSTRACT) {
+			if(result_operations.front() == math::decimal::operation::Type::ADD ||
+					result_operations.front() == math::decimal::operation::Type::SUBSTRACT) {
 
 				result_numbers.push_front(0.0);
 			}
@@ -98,17 +97,17 @@ namespace {
 
 	}
 
-	void handle_single_number(ParsedData& data) {
+	void handle_single_number(math::decimal::input::ParsedData& data) {
 
 		auto& [ result_numbers, result_operations ] = data;
 
 		if(result_numbers.size() == 1ul && result_operations.empty()) {
-			result_operations.push_back(operation::Type::ADD);
+			result_operations.push_back(math::decimal::operation::Type::ADD);
 			result_numbers.push_back(0.0);
 		}
 	}
 
-	void handle_single_operations(ParsedData& data) {
+	void handle_single_operations(math::decimal::input::ParsedData& data) {
 
 		auto& [ result_numbers, result_operations ] = data;
 
@@ -119,7 +118,7 @@ namespace {
 	}
 }
 
-namespace input {
+namespace math::decimal::input {
 
 
 	ParsedData Parser::parse(Data input) const {
