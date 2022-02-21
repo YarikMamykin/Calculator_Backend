@@ -11,7 +11,7 @@ set(CMAKE_INSTALL_RPATH_USE_LINK_PATH ON)
 project(calculator LANGUAGES CXX)
 
 include_directories(Connection)
-include_directories(Math/CalculationPipe)
+include_directories(Math)
 include_directories(Router)
 
 add_subdirectory(Connection)
