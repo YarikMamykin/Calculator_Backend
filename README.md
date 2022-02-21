@@ -31,21 +31,18 @@ Dedicated UI implementations:
 
 ### Build
 
-1. Build the boost library 
-- `./build_boost.sh`
-
-2. Build the application
-- `mkdir -p build && cd build`
-- `cmake -DBUILD_TESTS=<ON|OFF> -DCMAKE_INSTALL_PREFIX=<specify_your_install_path> ..`
-- `make -j<number_of_threads> install`
+1. Build the application
+- `cmake -S . -B build -DBUILD_TESTS=<ON|OFF> -DCMAKE_INSTALL_PREFIX=install -DBOOST_BUILD_CPU_THREADS=<1...N>`
+- `cmake --build build -- -j <1...N>`
+- `cmake --install build` 
 
 ### Run
 
-1. To run the application go to installation path specified in previous steps and run 
-	`./calculator`
-	By default application uses `127.0.0.1:8081` to communicate with frontend.
-	To specify another address and port run:
-	`CALC_HOST=<your_host> CALC_PORT=<your_port> ./calculator`
+1. `export LD_LIBRARY_PATH=${PWD}/install/lib` - specify path to shared libraries
 
-2. To run the unit tests go to installation path and run 
-	`./UNIT_TESTS`
+2. To run the application go to `<installation_path>/bin` specified in previous steps and run `./calculator`.
+	 By default application uses `127.0.0.1:8081` to communicate with frontend. 
+	 To specify another address and port run: `CALC_HOST=<your_host> CALC_PORT=<your_port> ./calculator`
+
+3. To run the unit tests from project root run:
+	`ctest --test-dir build/tests --output-on-failure`
