@@ -2,10 +2,10 @@
 #include <tuple>
 #include <string>
 #include <bitset>
-#include <OperationID.h>
+#include <Binary/Enums/OperationID.h>
 
 
-namespace binary::input {
+namespace math::binary::input {
 
 	constexpr std::size_t BinaryNumberSize { 64u };
 	using BinaryNumber = std::bitset<BinaryNumberSize>;

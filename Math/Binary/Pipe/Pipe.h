@@ -1,10 +1,13 @@
 #pragma once
 
-#include "CalculationPipe.h"
+#include <Pipe/Pipe.h>
 
-namespace calculation {
+namespace math::binary::calculation {
 
-	struct BinaryCalculationPipe : public CalculationPipe {
+	struct Pipe : public math::calculation::Pipe {
+
+		Pipe();
+		~Pipe();
 
 		std::string run(std::string&& data) const override final;
 
