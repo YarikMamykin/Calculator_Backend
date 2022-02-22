@@ -5,6 +5,7 @@ add_executable(DECIMAL_UNIT_TESTS
 	${CMAKE_CURRENT_SOURCE_DIR}/ParserTest.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/DataConverterTest.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/CalculatorTest.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/PipeTest.cpp
 )
 
 target_link_libraries(DECIMAL_UNIT_TESTS  
