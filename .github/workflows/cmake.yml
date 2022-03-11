@@ -17,7 +17,7 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Prepare for build
-      run: cmake -S . -B build -DCMAKE_INSTALL_PREFIX=. -DBUILD_TESTS=ON -DBOOST_BUILD_CPU_THREADS=16
+      run: cmake -S . -B build -DCMAKE_INSTALL_PREFIX=./install -DBUILD_TESTS=ON -DBOOST_BUILD_CPU_THREADS=16
     
     - name: Build
       run: cmake --build build -- -j 16
@@ -25,5 +25,23 @@ jobs:
     - name: Install
       run: cmake --install build
 
-    - name: Run tests
-      run: ctest --verbose --test-dir build/tests
+    - name: Upload install
+      uses: actions/upload-artifact@v2
+      with:
+        path: install/
+
+  tests:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download install
+        uses: actions/download-artifact@v2
+        with:
+          path: install/
+
+      - name: List
+        run: ls -lst install/**
+
+      - name: Unit tests
+        run: cd install && chmod +x ./bin/tests/UNIT_TESTS && ./bin/tests/UNIT_TESTS
+
